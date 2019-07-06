@@ -41,4 +41,20 @@ router.get("/:id", (req, res) => {
     .catch(err => console.log(err));
 });
 
+// UPDATE
+
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+  Item.findById(id, (err, item) => {
+    console.log(item.roomsAvailable);
+
+    item.roomsAvailable = req.body.roomsAvailable;
+
+    item
+      .save()
+      .then(item => res.json(item))
+      .catch(err => console.log(err));
+  });
+});
+
 module.exports = router;
